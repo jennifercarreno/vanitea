@@ -2,6 +2,8 @@
 
 import Header from "../../components/header";
 import { Card, Grid, Row, Text, Col } from "@nextui-org/react";
+import Link from 'next/link'
+
 
 
 export const getStaticProps = async () => {
@@ -39,6 +41,7 @@ const Products = ({products}) => {
                 <Card isPressable isHoverable>
                     <Card.Body css={{ p: 0 }}>
                     <Card.Image
+                        showSkeleton
                         src={product["image450"]}
                         objectFit="cover"
                         width="300px"
@@ -48,7 +51,12 @@ const Products = ({products}) => {
                     </Card.Body>
                     <Card.Footer css={{ justifyItems: "flex-start" }}>
                     <Col>
+                    <Link 
+                    href={'/products/' + product["productId"]}>
+
                     <Text b>{product["displayName"]}</Text>
+                    </Link>
+                    
                         
                     
                     <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>
