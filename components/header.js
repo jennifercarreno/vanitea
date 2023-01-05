@@ -2,75 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Button, Link, Text, useTheme, Input } from "@nextui-org/react";
 import { SearchIcon } from "../components/searchicon";
 import SearchBar from '../components/searchbar';
+import { useSession, signIn, signOut } from "next-auth/react";
 
 
-
-// import {
-//     Collapse,
-//     Navbar,
-//     NavbarToggler,
-//     NavbarBrand,
-//     Nav,
-//     NavItem,
-//     NavLink,
-// } from 'reactstrap';
-// import Link from 'next/link'
-
-// from 'reactstrap';
-
-// const Header = () => {
-//     const [isOpen, setIsOpen] = useState(false);
-//     const [sticky, setSticky] = useState(false);
-//     const toggle = () => setIsOpen(!isOpen);
-
-//     useEffect(() => {
-//         window.addEventListener('scroll', handleScroll);
-//     });
-
-//     const handleScroll = () => {
-//         if (window.scrollY > 180) {
-//             setSticky(true);
-//         } else if (window.scrollY < 180) {
-//             setSticky(false);
-//         }
-//     }
-
-//     return (
-//         <nav >
-//            <Link href="/">
-//               <div><p>Home</p></div>
-//            </Link>
-           
-//         </nav>
-//      );
-// }
 export default function Header() {
     const { isLight } = useTheme();
+    const { data: session } = useSession();
   
     return (
       
         <Navbar shouldHideOnScroll isBordered={isLight} variant="sticky">
           <Navbar.Brand>
             
-            <Text b color="inherit" hideIn="xs">
+            <Text b color="secondary" hideIn="xs">
               LOGO
             </Text>
           </Navbar.Brand>
           <Navbar.Content hideIn="xs" variant="highlight">
           <Navbar.Link href="/">Home</Navbar.Link>
 
-          <Navbar.Link href="/products/" isActive>Products</Navbar.Link>
+          <Navbar.Link href="/products/" isActive activeColor="secondary">Products</Navbar.Link>
 
          
           </Navbar.Content>
           <Navbar.Content>
-            <Navbar.Link color="inherit" href="#">
+            <Navbar.Link activeColor="secondary" href="#">
               Login
             </Navbar.Link>
             <Navbar.Item>
-              <Button auto flat as={Link} href="#">
+            {!session ? (
+                <>
+                  <p>Not signed in</p>
+                  <br />
+                  <button onClick={() => signIn()}>Sign in</button>
+                </>
+              ) : (
+                
+                  <div>
+                    <h4>Signed in as {session.user.name}</h4>
+                    <button onClick={() => signOut()}>Sign out</button>
+                  </div>)}
+              {/* <Button color="secondary" auto  as={Link}  href="#">
                 Sign Up
-              </Button>
+              </Button> */}
             </Navbar.Item>
           </Navbar.Content>
         </Navbar>

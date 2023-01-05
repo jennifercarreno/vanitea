@@ -1,5 +1,5 @@
 import Header from "../../components/header";
-import { Card, Grid, Row, Text, Col, Image } from "@nextui-org/react";
+import { Card, Grid, Row, Text, Col, Image, Spacer } from "@nextui-org/react";
 
 export const getStaticPaths = async () => {
     const options = {
@@ -51,14 +51,14 @@ const Detail = ({product}) => {
     return (
         <div> 
             <Header></Header>
-            <h1> product detail page</h1>
             <div className="container">
+              <Spacer y={2}></Spacer>
               <Grid.Container gap={2} justify="center">
                 <Grid xs={6}>
                 <Image
                     // width={320}
                     // height={180}  
-                    src= { product["currentSku"].alternateImages[6].image1500}
+                    src= { product["currentSku"].alternateImages[0].image1500}
                     // alt="Default Image"
                     objectFit="cover"
                     />
@@ -66,8 +66,9 @@ const Detail = ({product}) => {
                 </Grid>
                 <Grid xs={6}>
                     <Col>
-                    <Text> { product["brand"].displayName}</Text>
-                    <Text> { product.displayName}</Text>
+                  
+                    <Text h3 color="white">{ product["brand"].displayName}</Text>
+                    <Text h2 color="secondary"> { product.displayName}</Text>
                     </Col>
                 
 

@@ -27,11 +27,6 @@ function SearchBar({ placeholder, data }) {
     }
   };
 
-//   const clearInput = () => {
-//     setFilteredData([]);
-//     setWordEntered("");
-//   };
-
 
 // search bar input and results
   return (
@@ -42,7 +37,8 @@ function SearchBar({ placeholder, data }) {
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
-          size="xl" 
+          width="500px"
+          size="xl"
 
           contentLeft={
             <SearchIcon fill="var(--nextui-colors-accents6)" size={16} />

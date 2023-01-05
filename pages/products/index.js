@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const options = {
         method: 'GET',
         headers: {
@@ -40,6 +40,9 @@ const Products = ({products}) => {
 
                 <Grid  xs={12} sm={2}>
                 <Card isPressable isHoverable>
+                <Link 
+                    href={'/products/' + product["productId"]}>
+
                     <Card.Body css={{ p: 0 }}>
                     <Card.Image
                         showSkeleton
@@ -52,14 +55,8 @@ const Products = ({products}) => {
                     </Card.Body>
                     <Card.Footer css={{ justifyItems: "flex-start" }}>
                     <Col>
-                    <Link 
-                    href={'/products/' + product["productId"]}>
-
                     <Text b>{product["displayName"]}</Text>
-                    </Link>
-                    
-                        
-                    
+    
                     <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>
                         {product["brandName"]}
                     </Text>
@@ -67,6 +64,7 @@ const Products = ({products}) => {
                     
                     
                     </Card.Footer>
+                    </Link>
                     </Card>
                 </Grid>
                 
