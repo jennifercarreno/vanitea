@@ -8,6 +8,8 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
+import Link from 'next/link'
+
 // from 'reactstrap';
 
 const Header = () => {
@@ -28,29 +30,13 @@ const Header = () => {
     }
 
     return (
-        <Navbar color="light" light container="md" expand="md" sticky={sticky ? "top" : ""}>
-            <NavbarBrand href="/">LOGO</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-                <Nav className="ms-auto" navbar>
-                    <Nav className="m-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/">Home</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#feature">Features</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#service">Services</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#about">About</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Nav>
-            </Collapse>
-        </Navbar>
-    )
+        <nav >
+           <Link href="/">
+              <div><p>Home</p></div>
+           </Link>
+           
+        </nav>
+     );
 }
 
 export default Header;

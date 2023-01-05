@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
 export default function Home({products}) {
   return(
     <div className={styles.container}>
-      <Link href="/prdtest/">
+      <Link href="/products/">
           list of products
         </Link>
       <SearchBar placeholder="Enter a Book Name..." data={products} />
