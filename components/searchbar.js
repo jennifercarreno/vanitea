@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import SearchIcon from "@material-ui/icons/Search";
 // import CloseIcon from "@material-ui/icons/Close";
+import Link from 'next/link'
 
 
 //filters results
@@ -53,7 +54,11 @@ function SearchBar({ placeholder, data }) {
             return (
                 
               <a className="dataItem" href={value.link} target="_blank">
-                <p>{value.displayName} </p>
+                <Link 
+                    href={'/products/' + value["productId"]}>
+
+                    <p >{value.displayName}</p>
+                  </Link>
               </a>
             );
           })}

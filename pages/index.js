@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import SearchBar from '../components/searchbar';
+import { Card, Grid, Row, Text, Col } from "@nextui-org/react";
 
 
 // getd generic top 50 makeup products
@@ -26,7 +27,7 @@ export default function Home({products}) {
       <Link href="/products/">
           list of products
         </Link>
-      <SearchBar placeholder="Enter a Book Name..." data={products} />
+      <SearchBar placeholder="Enter a Product Name..." data={products} />
     </div>
     
   )
