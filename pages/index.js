@@ -1,34 +1,31 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import Layout from "../components/layout";
-import Header from "../components/header";
-import TodoItem from "../components/item";
+import Link from 'next/link'
+import SearchBar from '../components/searchbar';
 
-
-// gets data from sephora api
-export async function getStaticProps() {
- 
+// getd generic top 50 makeup products
+export const getServerSideProps = async () => {
   const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'b82bf727eamshb441fb23f205663p15f593jsn4d803957ffad',
-      'X-RapidAPI-Host': 'sephora.p.rapidapi.com'
-    }
+      method: 'GET',
+      headers: {
+          'X-RapidAPI-Key': process.env.APIKEY,
+          'X-RapidAPI-Host': 'sephora.p.rapidapi.com'
+      }
   };
-  const res = await fetch('https://sephora.p.rapidapi.com/auto-complete?q=rare%20beauty', options)
-  const allPostsData = await res.json();
-     
-  return {props: {allPostsData}};
+  
+  const res = await fetch('https://sephora.p.rapidapi.com/products/list?categoryId=cat140006&pageSize=50&currentPage=1', options)
+  const data = await res.json();
+  console.log(data["products"])
+       
+  return{ props: {products: data["products"]}}
 }
 
-// displays data
-export default function Home({allPostsData}) {
+export default function Home({products}) {
   return(
     <div className={styles.container}>
-      {/* <button onClick={callAPI}>Add Todo</button> */}
-      <p>{allPostsData.typeAheadTerms[3]["brandName"]}</p>
+      <Link href="/prdtest/">
+          list of products
+        </Link>
+      <SearchBar placeholder="Enter a Book Name..." data={products} />
     </div>
     
   )
