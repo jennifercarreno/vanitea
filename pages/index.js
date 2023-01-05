@@ -1,7 +1,10 @@
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import SearchBar from '../components/searchbar';
-import { Card, Grid, Row, Text, Col } from "@nextui-org/react";
+import { Card, Grid, Row, Text, Col, Spacer } from "@nextui-org/react";
+import Header from "../components/header";
+import { SearchIcon } from '../components/searchicon';
+
 
 
 // getd generic top 50 makeup products
@@ -23,12 +26,23 @@ export const getServerSideProps = async () => {
 
 export default function Home({products}) {
   return(
-    <div className={styles.container}>
-      <Link href="/products/">
-          list of products
-        </Link>
-      <SearchBar placeholder="Enter a Product Name..." data={products} />
+    <div>
+      <div>
+      <Header></Header>
+      </div>
+
+      <div className="container">
+        <Link href="/products/">
+            list of products
+          </Link>
+        <Row>
+        <SearchBar placeholder="Search" data={products} />
+        </Row>
+
+    
+      </div>
     </div>
+    
     
   )
  

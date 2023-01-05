@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 // import SearchIcon from "@material-ui/icons/Search";
 // import CloseIcon from "@material-ui/icons/Close";
-import Link from 'next/link'
+import Link from 'next/link';
+import { Input } from "@nextui-org/react";
+
+import { SearchIcon } from "./searchicon";
 
 
 //filters results
@@ -32,21 +35,20 @@ function SearchBar({ placeholder, data }) {
 
 // search bar input and results
   return (
-    <div className="search">
-      <div className="searchInputs">
-        <input
+    <div >
+      <div >
+        <Input
           type="text"
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
+          size="xl" 
+
+          contentLeft={
+            <SearchIcon fill="var(--nextui-colors-accents6)" size={16} />
+          }
         />
-        {/* <div className="searchIcon">
-          {filteredData.length === 0 ? (
-            <SearchIcon />
-          ) : (
-            <CloseIcon id="clearBtn" onClick={clearInput} />
-          )}
-        </div> */}
+       
       </div>
       {filteredData.length != 0 && (
         <div className="dataResult">

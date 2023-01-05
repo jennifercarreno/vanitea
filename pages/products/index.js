@@ -1,7 +1,7 @@
 // testing out sephora api, loads charlotte tilbury products and displays their name
 
 import Header from "../../components/header";
-import { Card, Grid, Row, Text, Col } from "@nextui-org/react";
+import { Card, Grid, Row, Text, Col, Pagination } from "@nextui-org/react";
 import Link from 'next/link'
 
 
@@ -23,6 +23,7 @@ export const getStaticProps = async () => {
   }
 
 const Products = ({products}) => {
+  
     return (
      
         <div>
@@ -73,6 +74,7 @@ const Products = ({products}) => {
                 
             ))}
             </Grid.Container>
+            <Pagination total={20} initialPage={1}/>;
             
             </div>
             
