@@ -2,6 +2,7 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import SearchBar from '../components/searchbar';
 
+
 // getd generic top 50 makeup products
 export const getServerSideProps = async () => {
   const options = {
