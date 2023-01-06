@@ -39,7 +39,7 @@ export const getStaticPaths = async () => {
     };
     const res = await fetch('https://sephora.p.rapidapi.com/products/detail?productId=' + id +'&preferedSku=2210607', options);
     const data = await res.json();
-    console.log(data)
+    // console.log(data)
   
     return {
       props: { product: data }
@@ -58,7 +58,7 @@ const Detail = ({product}) => {
                 <Image
                     // width={320}
                     // height={180}  
-                    src= { product["currentSku"].alternateImages[0].image1500}
+                    src= { product["currentSku"].skuImages.image1500}
                     // alt="Default Image"
                     objectFit="cover"
                     />
