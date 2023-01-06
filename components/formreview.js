@@ -1,7 +1,5 @@
-import { Textarea, Grid, Input } from "@nextui-org/react";
-// const Test = require('../models/testmodel')
-// import connectMongo from "../utils/connectmongo";
-// import Test from "../models/testmodel";
+import { Textarea, Grid, Input, Spacer, Button } from "@nextui-org/react";
+
 import React, { useEffect, useState } from "react";
 
 // export const getServerSideProps = async () => {
@@ -28,11 +26,13 @@ import React, { useEffect, useState } from "react";
 //   };
 
 export default function Form() {
+
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
+    // creates the test post 
     const createTest = async () => {
         const randomNum = Math.floor(Math.random() * 1000);
         const res = await fetch('/api/test/add', {
@@ -50,11 +50,14 @@ export default function Form() {
       };
     
     return(
+      <div className="container">
+        <Spacer y={2}></Spacer>
         <form onSubmit={createTest} className="form">
       {error ? <div className="alert-error">{error}</div> : null}
       {message ? <div className="alert-message">{message}</div> : null}
       <div className="form-group">
-        {/* <label>Title</label> */}
+        <label>Title</label>
+        <Spacer y={.5} />
         <Input
             type= "text"
             placeholder= "Title of the post"
@@ -63,7 +66,9 @@ export default function Form() {
         />
       </div>
       <div className="form-group">
-        {/* <label>Content</label> */}
+        <Spacer y={1}></Spacer>
+        <label>Content</label>
+        <Spacer y={.5} />
         <Textarea
             // color="secondary"
             name= "content"
@@ -72,14 +77,20 @@ export default function Form() {
             onChange={(e) => setContent(e.target.value)}
             cols={20}
             rows={8}
+            fullWidth="true"
         />
       </div>
       <div className="form-group">
-        <button type="submit" className="submit_btn">
+        <Spacer y={.5} />
+
+        <Button color="secondary" type="submit" className="submit_btn">
           Add Post
-        </button>
+        </Button>
       </div>
     </form>
+      </div>
+
+        
     )
 
 }
