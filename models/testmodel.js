@@ -1,11 +1,10 @@
 import { Schema, model, models } from 'mongoose';
 
 const testSchema = new Schema({
-  name: String,
-  email: {
+  title: String,
+  content: {
     type: String,
-    required: true,
-    unique: true,
+  
   },
 });
 

@@ -22,6 +22,8 @@ export default function Header() {
           <Navbar.Link href="/">Home</Navbar.Link>
 
           <Navbar.Link href="/products/" isActive activeColor="secondary">Products</Navbar.Link>
+          <Navbar.Link href="/reviews/" isActive activeColor="secondary">Reviews</Navbar.Link>
+
 
          
           </Navbar.Content>

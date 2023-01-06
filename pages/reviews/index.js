@@ -1,6 +1,8 @@
 // home page for reviews
 import connectMongo from '../../utils/connectMongo';
 import Test from '../../models/testmodel';
+import { Textarea, Grid, Input } from "@nextui-org/react";
+import Form from '../../components/formreview';
 
 export const getServerSideProps = async () => {
   try {
@@ -26,34 +28,23 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ tests }) {
-    const createTest = async () => {
-        const randomNum = Math.floor(Math.random() * 1000);
-        const res = await fetch('/api/test/add', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: `Test ${randomNum}`,
-            email: `test${randomNum}@test.com`,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-      };
     
     return (
     
       <div >
-          <div className="container"> <button onClick={createTest}>Create Test</button></div>
+{/*     FORM     */}
+        <Form></Form>
+          {/* <div className="container"> <button onClick={createTest}>Create Test</button></div> */}
         {tests.map((test) => (
           <a
             href="https://nextjs.org/docs"
             key={test._id}
             
           >
-            <h2>{test.name} &rarr;</h2>
-            <p>{test.email}</p>
+            <h2>{test.title} &rarr;</h2>
+            <p>{test.content}</p>
+
+            
           </a>
         ))}
       </div>
