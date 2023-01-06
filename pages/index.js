@@ -27,6 +27,8 @@ export const getServerSideProps = async () => {
 
 export default function Home({products, pageProps:session}) {
 
+  
+
   return(
     <div>
       <div>

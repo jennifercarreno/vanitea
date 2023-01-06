@@ -1,60 +1,63 @@
 // home page for reviews
-import { useState } from 'react';
+import connectMongo from '../../utils/connectMongo';
+import Test from '../../models/testmodel';
 
-export default function AddPost() {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+export const getServerSideProps = async () => {
+  try {
+    console.log('CONNECTING TO MONGO');
+    await connectMongo();
+    console.log('CONNECTED TO MONGO');
 
-    const handlePost = async (e) => {
-        e.preventDefault();
+    console.log('FETCHING DOCUMENTS');
+    const tests = await Test.find();
+    console.log('FETCHED DOCUMENTS');
 
-        // reset error and message
-        setError('');
-        setMessage('');
-// fields check
-if (!title || !content) return setError('All fields are required');
+    return {
+      props: {
+        tests: JSON.parse(JSON.stringify(tests)),
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
+  }
 };
 
-return (
-    <div>
-        <div >
-            <form onSubmit={handlePost} >
-                {error ? (
-                    <div >
-                        <h3 >{error}</h3>
-                    </div>
-                ) : null}
-                {message ? (
-                    <div >
-                        <h3 >{message}</h3>
-                    </div>
-                ) : null}
-                <div >
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        name="title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        placeholder="title"
-                    />
-                    </div>
-                    <div >
-                        <label>Content</label>
-                        <textarea
-                            name="content"
-                            onChange={(e) => setContent(e.target.value)}
-                            value={content}
-                            placeholder="Post content"
-                        />
-                    </div>
-                    <div >
-                        <button type="submit">Add post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+export default function Home({ tests }) {
+    const createTest = async () => {
+        const randomNum = Math.floor(Math.random() * 1000);
+        const res = await fetch('/api/test/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: `Test ${randomNum}`,
+            email: `test${randomNum}@test.com`,
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+      };
+    
+    return (
+    
+      <div >
+          <div className="container"> <button onClick={createTest}>Create Test</button></div>
+        {tests.map((test) => (
+          <a
+            href="https://nextjs.org/docs"
+            key={test._id}
+            
+          >
+            <h2>{test.name} &rarr;</h2>
+            <p>{test.email}</p>
+          </a>
+        ))}
+      </div>
+      // ...
     );
-}
+  }
+  
