@@ -26,22 +26,6 @@ export const getServerSideProps = async () => {
 }
 
 export default function Home({products, pageProps:session}) {
-  export const getServerSideProps = async () => {
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': process.env.APIKEY,
-            'X-RapidAPI-Host': 'sephora.p.rapidapi.com'
-        }
-    };
-    
-    const res = await fetch('https://sephora.p.rapidapi.com/products/list?categoryId=cat140006&pageSize=50&currentPage=1', options)
-    const data = await res.json();
-    console.log(data["products"])
-         
-    return{ props: {products: data["products"]}}
-  }
-  
 
   return(
     <div>

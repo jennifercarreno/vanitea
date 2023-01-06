@@ -2,33 +2,11 @@ import { Textarea, Grid, Input, Spacer, Button } from "@nextui-org/react";
 
 import React, { useEffect, useState } from "react";
 
-// export const getServerSideProps = async () => {
-//     try {
-//       console.log('CONNECTING TO MONGO');
-//       await connectMongo();
-//       console.log('CONNECTED TO MONGO');
-  
-//       console.log('FETCHING DOCUMENTS');
-//       const tests = await Test.find();
-//       console.log('FETCHED DOCUMENTS');
-  
-//       return {
-//         props: {
-//           tests: JSON.parse(JSON.stringify(tests)),
-//         },
-//       };
-//     } catch (error) {
-//       console.log(error);
-//       return {
-//         notFound: true,
-//       };
-//     }
-//   };
-
 export default function Form() {
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    // const [productId, setProduct] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
@@ -43,6 +21,7 @@ export default function Form() {
           body: JSON.stringify({
             title,
             content,
+            productId
           }),
         });
         const data = await res.json();
@@ -64,6 +43,7 @@ export default function Form() {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
         />
+        <Input disabled placeholder="Disabled" value={productId} onChange={(e) => setProduct(e.target.value)}/>
       </div>
       <div className="form-group">
         <Spacer y={1}></Spacer>

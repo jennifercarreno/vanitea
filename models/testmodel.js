@@ -6,6 +6,7 @@ const testSchema = new Schema({
     type: String,
   
   },
+  productId: String
 });
 
 const Test = models.Test || model('Test', testSchema);
