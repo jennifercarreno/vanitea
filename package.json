@@ -23,6 +23,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.5",
+    "react-iconly": "^2.2.5",
     "react-instantsearch-dom": "^6.38.2",
     "react-router-dom": "^6.6.1",
     "reactstrap": "^9.1.5",
