@@ -7,7 +7,8 @@ const testSchema = new Schema({
   
   },
   productId: String,
-  userEmail: String
+  userEmail: String,
+  tags: []
 });
 
 const Test = mongoose.model('Test', testSchema) || model('Test', testSchema);

@@ -53,7 +53,7 @@ export const getStaticPaths = async () => {
 const Detail = ({product}) => {
   const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [productId, setProduct] = useState("");
+    const [tags, setTags] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const { data: session } = useSession();
@@ -71,6 +71,7 @@ const Detail = ({product}) => {
         content,
         productId: product.productId,
         userEmail: session.user.email,
+        tags
       }),
     });
     const data = await res.json();
@@ -110,45 +111,56 @@ const Detail = ({product}) => {
                 <button onClick={() => signIn()}>Sign in</button>
               </>
               ) : (
-                
+                // FORM
                   <div className="container">
-<Spacer y={2}></Spacer>
-<form onSubmit={createTest} className="form">
-{error ? <div className="alert-error">{error}</div> : null}
-{message ? <div className="alert-message">{message}</div> : null}
-<div className="form-group">
-<label>Title</label>
-<Spacer y={.5} />
-<Input
-    type= "text"
-    placeholder= "Title of the post"
-    onChange={(e) => setTitle(e.target.value)}
-    value={title}
-/>
-</div>
-<div className="form-group">
-<Spacer y={1}></Spacer>
-<label>Content</label>
-<Spacer y={.5} />
-<Textarea
-    // color="secondary"
-    name= "content"
-    placeholder= "Content of the post"
-    value={content}
-    onChange={(e) => setContent(e.target.value)}
-    cols={20}
-    rows={8}
-    fullWidth="true"
-/>
-</div>
-<div className="form-group">
-<Spacer y={.5} />
+                    <Spacer y={2}></Spacer>
 
-<Button color="secondary" type="submit" className="submit_btn">
-  Add Post
-</Button>
-</div>
-</form>
+                    <form onSubmit={createTest} className="form">
+                    {error ? <div className="alert-error">{error}</div> : null}
+                    {message ? <div className="alert-message">{message}</div> : null}
+                      <div className="form-group">
+                        <label>Title</label>
+                        <Spacer y={.5} />
+                        <Input
+                            type= "text"
+                            placeholder= "Title of the post"
+                            onChange={(e) => setTitle(e.target.value)}
+                            value={title}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>tags</label>
+                        <Spacer y={.5} />
+                        <Input
+                            type= "text"
+                            placeholder= "Add Tags"
+                            onChange={(e) => setTags(e.target.value)}
+                            value={tags}
+                        />
+                      </div>
+                      <div className="form-group">
+                      <Spacer y={1}></Spacer>
+                        <label>Content</label>
+                        <Spacer y={.5} />
+                        <Textarea
+                            // color="secondary"
+                            name= "content"
+                            placeholder= "Content of the post"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            cols={20}
+                            rows={8}
+                            fullWidth="true"
+                        />
+                      </div>
+                      <div className="form-group">
+                      <Spacer y={.5} />
+
+                        <Button color="secondary" type="submit" className="submit_btn">
+                          Add Post
+                        </Button>
+                      </div>
+                    </form>
 
 </div>
                   
