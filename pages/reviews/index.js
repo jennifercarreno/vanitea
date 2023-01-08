@@ -1,10 +1,13 @@
 // home page for reviews
-import connectMongo from '../../utils/connectMongo';
+import connectMongo from '../../utils/connectmongo';
 import Test from '../../models/testmodel';
 import { Textarea, Grid, Input } from "@nextui-org/react";
 import Form from '../../components/formreview';
+import Header from '../../components/header';
 
 export const getServerSideProps = async () => {
+  
+
   try {
     console.log('CONNECTING TO MONGO');
     await connectMongo();
@@ -13,7 +16,7 @@ export const getServerSideProps = async () => {
     console.log('FETCHING DOCUMENTS');
     const tests = await Test.find();
     console.log('FETCHED DOCUMENTS');
-
+    // console.log(tests)
     return {
       props: {
         tests: JSON.parse(JSON.stringify(tests)),
@@ -22,7 +25,7 @@ export const getServerSideProps = async () => {
   } catch (error) {
     console.log(error);
     return {
-      notFound: true,
+      props: {tests:[]}
     };
   }
 };
@@ -32,9 +35,7 @@ export default function Home({ tests }) {
     return (
     
       <div >
-{/*     FORM     */}
-        <Form></Form>
-          {/* <div className="container"> <button onClick={createTest}>Create Test</button></div> */}
+        <Header></Header>
         {tests.map((test) => (
           <a
             href="https://nextjs.org/docs"
@@ -48,7 +49,6 @@ export default function Home({ tests }) {
           </a>
         ))}
       </div>
-      // ...
     );
   }
   

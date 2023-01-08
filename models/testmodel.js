@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose, { Schema, model, models } from 'mongoose';
 
 const testSchema = new Schema({
   title: String,
@@ -6,9 +6,10 @@ const testSchema = new Schema({
     type: String,
   
   },
-  productId: String
+  productId: String,
+  userEmail: String
 });
 
-const Test = models.Test || model('Test', testSchema);
+const Test = mongoose.model('Test', testSchema) || model('Test', testSchema);
 
 export default Test;
