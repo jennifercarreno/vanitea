@@ -4,6 +4,9 @@ import { Card, Grid, Row, Text, Col, Image, Spacer, Input, Textarea, Button } fr
 import React, { useEffect, useState } from "react";
 // import Reviews from "../../components/reviews";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useForm } from "react-hook-form"; 
+import { v4 as uuidv4 } from 'uuid';
+
 export const getStaticPaths = async () => {
     const options = {
         method: 'GET',
@@ -31,7 +34,7 @@ export const getStaticPaths = async () => {
     }
   }
 
-  export const getStaticProps = async (context) => {
+export const getStaticProps = async (context) => {
     const id = context.params.product;
     const options = {
         method: 'GET',
@@ -53,10 +56,27 @@ export const getStaticPaths = async () => {
 const Detail = ({product}) => {
   const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [tags, setTags] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const { data: session } = useSession();
+
+    const [tags, setTags] = React.useState([
+      {
+        tag: "",
+        id: uuidv4(),
+      },
+    ])
+
+    const addMemberRow = () => {
+      //Todo generate random id
+  
+      let _tags = [...tags]
+      _tags.push({
+        tag: "",
+        id: uuidv4(),
+      })
+      setTags(_tags)
+    }
 
   const createTest = async () => {
     console.log(session.id)
@@ -77,6 +97,8 @@ const Detail = ({product}) => {
     const data = await res.json();
     console.log(data);
   };
+
+  const {} = useForm();
 
     return (
         <div> 
@@ -129,14 +151,26 @@ const Detail = ({product}) => {
                         />
                       </div>
                       <div className="form-group">
-                        <label>tags</label>
-                        <Spacer y={.5} />
-                        <Input
-                            type= "text"
-                            placeholder= "Add Tags"
-                            onChange={(e) => setTags(e.target.value)}
-                            value={tags}
-                        />
+                      <div className="invite-member">
+                          {tags.map((tag) => (
+                            <div className="form-row" key={tag.id}>
+                              <div className="input-group">
+                                <label htmlFor="tag">Tag</label>
+                                <Input
+                                  name="tag"
+                                  type="text"
+                                  // onChange={(e) => handleMemberChange(member.id, e)}
+                                />
+                              </div>
+                              
+                              
+
+                              <Button onClick={addMemberRow}>+</Button>
+                            </div>
+                          ))}
+
+                          
+                        </div>
                       </div>
                       <div className="form-group">
                       <Spacer y={1}></Spacer>
