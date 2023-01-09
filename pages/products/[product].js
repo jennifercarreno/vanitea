@@ -57,32 +57,47 @@ export const getStaticProps = async (context) => {
 
 const Detail = ({product}) => {
   const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
-    const { data: session } = useSession();
+  const [content, setContent] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [tagInput, setTagInput] = useState("");
+  const { data: session } = useSession();
+  const tagList = []
 
-    const [tags, setTags] = React.useState([
-      {
-        tag: "",
-        id: uuidv4(),
-      },
-    ])
+  const [inputFields, setInputFields] = useState([
+    { id: uuidv4(), firstTag: '' },
+  ]);
+  
 
     const addMemberRow = () => {
       //Todo generate random id
   
-      let _tags = [...tags]
-      _tags.push({
-        tag: "",
-        id: uuidv4(),
-      })
-      setTags(_tags)
+      let _inputFields = [...inputFields]
+      _inputFields.push({ id: uuidv4(), firstTag: '' })
+      setInputFields(_inputFields)
     }
 
-  const createTest = async () => {
-    console.log(session.id)
-    const randomNum = Math.floor(Math.random() * 1000);
+    const handleChangeInput = (id, event) => {
+      const newInputFields = inputFields.map(i => {
+        if(id === i.id) {
+          i[event.target.name] = event.target.value
+          
+
+        }
+        tagList.push(i.firstTag)
+        // console.log(tagList)
+        return i;
+      })
+      console.log("TAGLIST INSIDE HANDLE"+tagList)
+      setInputFields(newInputFields);
+      return tagList;
+    }  
+
+
+  const createTest = async (e) => {
+    e.preventDefault();
+    let list = handleChangeInput()
+    console.log(tagList)
     const res = await fetch('/api/test/add', {
       method: 'POST',
       headers: {
@@ -93,14 +108,15 @@ const Detail = ({product}) => {
         content,
         productId: product.productId,
         userEmail: session.user.email,
-        tags
+        tags: list
       }),
     });
     const data = await res.json();
     console.log(data);
+
   };
 
-  const {} = useForm();
+  // const {} = useForm();
 
   return (
     <div> 
@@ -165,15 +181,33 @@ const Detail = ({product}) => {
                   <Spacer y={.5}></Spacer>
                   <div className="tags">
                   <label htmlFor="tag">Tag</label>
-                    {tags.map((tag) => (
+
+                  { inputFields.map(inputField => (
+                  <div key={inputField.id}>
+                    <Input
+                      name="firstTag"
+                      label="Tag"
+                      variant="filled"
+                      value={inputField.firstTag}
+                      onChange={(event) => handleChangeInput(inputField.id, event)}
+                    />
+                    <Button onClick={addMemberRow} icon={<Plus set="bold" fill="currentColor"/>} rounded auto color="secondary">   
+                    </Button>
+                  
+                    
+                  </div>
+                )) }
+
+                    {/* {tags.map((tag) => (
                       <div className="form-row" key={tag.id}>
                         
                           <Spacer y={.5}></Spacer>
                           <Row>
                           <Input
-                            name="tag"
+                            // name="tagInput"
                             type="text"
-                            // onChange={(e) => handleMemberChange(member.id, e)}
+                            onChange={(e) => setTagInput(e.target.value)}
+                            value={tagInput.tag}
                           />
                           <Spacer x={.5}></Spacer>
                         <Button onClick={addMemberRow} icon={<Plus set="bold" fill="currentColor"/>} rounded auto color="secondary">   
@@ -183,7 +217,7 @@ const Detail = ({product}) => {
                         
                         
                       </div>
-                    ))}
+                    ))} */}
 
                           
                   </div>
