@@ -4,8 +4,32 @@ import Header from '../../components/header'
 import connectMongo from "../../utils/connectmongo";
 import Test from "../../models/testmodel";
 
+export const getServerSideProps = async ({req}) => {
+    const session = await getSession({req})
+    console.log(session)
+    try {
+      console.log('CONNECTING TO MONGO');
+      await connectMongo();
+      console.log('CONNECTED TO MONGO');
+  
+      console.log('FETCHING DOCUMENTS');
+      const reviews = await Test.find({userEmail: session.user.email});
+      console.log('FETCHED DOCUMENTS');
+      console.log(reviews)
+      return {
+        props: {
+          reviews: JSON.parse(JSON.stringify(reviews)),
+        },
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        props: {tests:[]}
+      };
+    }
+  };
 
-export default function UserHome() {
+export default function UserHome({ reviews }) {
     const { data: session } = useSession();
     return (
         <div>
@@ -38,7 +62,20 @@ export default function UserHome() {
                     <Spacer y={2}></Spacer>
                     <Row>
                         <h3>Recent Reviews</h3>
+                        
                     </Row>
+                    {reviews.map((review) => (
+                            <a
+                                href="https://nextjs.org/docs"
+                                key={review._id}
+                                
+                            >
+                                <h2>{review.title} &rarr;</h2>
+                                <p>{review.content}</p>
+
+                                
+                            </a>
+                            ))}
                 </div>
             )}
         </div>
@@ -46,27 +83,3 @@ export default function UserHome() {
     )
 }
 
-export const getServerSideProps = async ({req}) => {
-    const session = await getSession({req})
-    console.log(session)
-    try {
-      console.log('CONNECTING TO MONGO');
-      await connectMongo();
-      console.log('CONNECTED TO MONGO');
-  
-      console.log('FETCHING DOCUMENTS');
-      const tests = await Test.find({userEmail: session.user.email});
-      console.log('FETCHED DOCUMENTS');
-      console.log(tests)
-      return {
-        props: {
-          tests: JSON.parse(JSON.stringify(tests)),
-        },
-      };
-    } catch (error) {
-      console.log(error);
-      return {
-        props: {tests:[]}
-      };
-    }
-  };
