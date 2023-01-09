@@ -7,6 +7,9 @@ const testSchema = new Schema({
   
   },
   productId: String,
+  productImage: String,
+  productName: String,
+  productBrand: String,
   userEmail: String,
   tags: []
 });

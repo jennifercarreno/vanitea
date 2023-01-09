@@ -107,6 +107,9 @@ const Detail = ({product}) => {
         title,
         content,
         productId: product.productId,
+        productImage: product["currentSku"].skuImages.image1500,
+        productName: product.displayName,
+        productBrand: product["brand"].displayName,
         userEmail: session.user.email,
         tags: list
       }),
