@@ -1,5 +1,5 @@
-import connectMongo from '../../../utils/connectMongo';
-import Test from '../../../models/testModel';
+import connectMongo from '../../../utils/connectmongo';
+import Test from '../../../models/testmodel';
 
 /**
  * @param {import('next').NextApiRequest} req

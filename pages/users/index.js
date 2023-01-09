@@ -3,7 +3,7 @@ import {Row, User, Text, Spacer, Image, Grid, Col, Button, Tooltip} from '@nextu
 import Header from '../../components/header'
 import connectMongo from "../../utils/connectmongo";
 import Test from "../../models/testmodel";
-
+import Wishlist from "../../models/wishlist";
 export const getServerSideProps = async ({req}) => {
     const session = await getSession({req})
     console.log(session)
@@ -14,6 +14,8 @@ export const getServerSideProps = async ({req}) => {
   
       console.log('FETCHING DOCUMENTS');
       const reviews = await Test.find({userEmail: session.user.email});
+      const wishlist = await Wishlist.find({userEmail: session.user.email});
+
       console.log('FETCHED DOCUMENTS');
       console.log(reviews)
       return {

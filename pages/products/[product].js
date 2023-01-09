@@ -2,7 +2,7 @@ import Header from "../../components/header";
 import { Card, Grid, Row, Text, Col, Image, Spacer, Input, Textarea, Button } from "@nextui-org/react";
 // import Form from "../../components/formreview";
 import React, { useEffect, useState } from "react";
-// import Reviews from "../../components/reviews";
+import Wishlist from "../../models/wishlist";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm } from "react-hook-form"; 
 import { v4 as uuidv4 } from 'uuid';
@@ -118,6 +118,7 @@ const Detail = ({product}) => {
     console.log(data);
 
   };
+
 
 
   return (
