@@ -132,7 +132,7 @@ const Detail = ({product}) => {
           {/* PRODUCT IMAGE */}
           <Grid xs={6}>
             <Image
-              src= { product["currentSku"].skuImages.image1500}
+              src= { product["currentSku"].skuImages.image1500 || null}
               objectFit="cover"
             />        
           </Grid>
