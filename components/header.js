@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Button, Link, Text, useTheme, Input, Dropdown, Avatar, Image } from "@nextui-org/react";
-import { SearchIcon } from "../components/searchicon";
-import SearchBar from '../components/searchbar';
 import { useSession, signIn, signOut } from "next-auth/react";
 
 

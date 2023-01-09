@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import {Row, User, Text, Spacer, Image, Grid, Col, Button, Tooltip} from '@nextui-org/react'
+import {Row, User, Spacer, Image, Grid, Col, Button, Tooltip} from '@nextui-org/react'
 import Header from '../../components/header'
 import connectMongo from "../../utils/connectmongo";
 import Test from "../../models/testmodel";

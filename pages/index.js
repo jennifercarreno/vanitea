@@ -1,7 +1,6 @@
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
+
 import SearchBar from '../components/searchbar';
-import { Card, Grid, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { Row, Text, } from "@nextui-org/react";
 import Header from "../components/header";
 import { SessionProvider } from "next-auth/react"
 
