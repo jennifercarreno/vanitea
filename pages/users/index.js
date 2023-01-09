@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import {Row, User, Text, Spacer} from '@nextui-org/react'
+import {Row, User, Text, Spacer, Image, Grid, Col, Button, Tooltip} from '@nextui-org/react'
 import Header from '../../components/header'
 import connectMongo from "../../utils/connectmongo";
 import Test from "../../models/testmodel";
@@ -66,17 +66,45 @@ export default function UserHome({ reviews }) {
                     </Row>
                     {reviews.map((review) => (
                         <div>
-                            <a
-                                href={'/products/' + review.productId}
-                                key={review._id}
-                                
-                            >
-                                <h2>{review.productName} &rarr;</h2>
-                                
 
+                        <Grid.Container>
+                            <Grid xs={2}>
+                                <Image src={review.productImage} ></Image>
+
+                            </Grid>
+                            <Spacer x={1}></Spacer>
+                            <Grid xs={6}>
+                                <Col>
+                                <a href={'/products/' + review.productId} key={review._id}>
+                                <h2>{review.productName} &rarr;</h2>
+                                </a>
+                                <Row>
+                                {review.tags.map((tag) => (
+                                    <Tooltip > 
+                                <Button shadow auto color="secondary">
+                                    {tag}
+                                </Button>
+                                <Spacer x={1}></Spacer>
+                                </Tooltip>
                                 
-                            </a>
-                            <p>{review.content}</p>
+                                    
+                                ))}
+                                </Row>
+                                <Spacer y={1.5}></Spacer>
+                                <p>{review.content}</p>
+                               
+                                
+                                
+                                </Col>
+                                
+                            </Grid>
+                               
+                                
+                             
+                            
+                        
+                        </Grid.Container>
+                       <Spacer y={1}></Spacer>
                         </div>
                             ))}
                 </div>
