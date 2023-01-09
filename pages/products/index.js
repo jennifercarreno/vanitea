@@ -57,7 +57,7 @@ const Products = ({products}) => {
                     <Col>
                     <Text b>{product["displayName"]}</Text>
     
-                    <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>
+                    <Text color="secondary" css={{ fontWeight: "$semibold", fontSize: "$sm" }}>
                         {product["brandName"]}
                     </Text>
                     </Col>

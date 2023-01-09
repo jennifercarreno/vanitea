@@ -1,7 +1,6 @@
 import mongoose, { Schema, model, models } from 'mongoose';
 
 const testSchema = new Schema({
-  title: String,
   content: {
     type: String,
   
@@ -14,6 +13,6 @@ const testSchema = new Schema({
   tags: []
 });
 
-const Test = mongoose.model('Test', testSchema) || model('Test', testSchema);
+const Test = models.Test || model('Test', testSchema);
 
 export default Test;

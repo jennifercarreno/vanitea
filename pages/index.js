@@ -1,9 +1,8 @@
 
 import SearchBar from '../components/searchbar';
-import { Row, Text, } from "@nextui-org/react";
+import { Row, Spacer, Text, } from "@nextui-org/react";
 import Header from "../components/header";
 import { SessionProvider } from "next-auth/react"
-
 
 
 
@@ -26,30 +25,41 @@ export const getServerSideProps = async () => {
 
 export default function Home({products, pageProps:session}) {
 
+  
+
   return(
-    <div>
-      <div>
+    <div width="100%">
+
+      <div width="100%">
       <SessionProvider session={session}>
       <Header></Header>
       </SessionProvider>
       </div>
 
-      <div className="container">
-        {/* <Link href="/products/">
-            list of products
-          </Link> */}
+      <div className="container" >
 
+    <Spacer y={3}></Spacer>
       <Text h1 size={60}
         css={{
-          textGradient: "45deg, $blue300 -20%, $pink600 100%",
+          textGradient: "45deg, $purple600 -20%, $pink600 100%",
         }}
         weight="bold"
         className="text-center"
       >
-        vanitea by jennifer
+      vanitea
+      </Text>
+      <Text h1 size="$xs"
+        css={{
+          textGradient: "45deg, $purple600 -20%, $pink600 100%",
+        }}
+        weight="bold"
+        className="text-center"
+      >
+      All Things Beauty, All in One Place
       </Text>
       
-    
+      <Spacer y={3}></Spacer>
+
         <Row className="justify-content-center">
         <SearchBar placeholder="Search" data={products} />
         </Row>
@@ -57,6 +67,7 @@ export default function Home({products, pageProps:session}) {
     
       </div>
     </div>
+    
     
     
   )

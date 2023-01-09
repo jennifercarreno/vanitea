@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider>
        <SSRProvider> 
+
             <Component {...pageProps} />
        </SSRProvider>
     </SessionProvider>

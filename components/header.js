@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Button, Link, Text, useTheme, Input, Dropdown, Avatar, Image } from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
 
-
 export default function Header() {
     const { isLight } = useTheme();
     const { data: session } = useSession();
     const [activeColor, setActiveColor] = React.useState("secondary")
     return (
-      
-        <Navbar shouldHideOnScroll isBordered={isLight} variant="sticky">
+     
+  
+        <div width="100%">
+        <Navbar shouldHideOnScroll isBordered={isLight} variant="sticky"  NavbarMaxWidth="fluid" color="secondary">
           <Navbar.Brand>
             
             <Image src="https://img.icons8.com/pastel-glyph/512/makeup.png" width="50px"></Image>
@@ -18,7 +19,7 @@ export default function Header() {
           <Navbar.Link href="/">Home</Navbar.Link>
 
           <Navbar.Link href="/products/"  activeColor="secondary">Products</Navbar.Link>
-          <Navbar.Link href="/reviews/"  activeColor="secondary">Reviews</Navbar.Link>
+          {/* <Navbar.Link href="/reviews/"  activeColor="secondary">Reviews</Navbar.Link> */}
 
 
          
@@ -61,8 +62,8 @@ export default function Header() {
                 </Text>
               </Dropdown.Item>
 
-              <Dropdown.Item key="settings" withDivider >
-               <a href='/users'>My Profile</a> 
+              <Dropdown.Item key="profile-page" withDivider >
+               <Link href='/users' block color="secondary">My Profile</Link> 
               </Dropdown.Item>
 
               <Dropdown.Item key="logout" withDivider  >
@@ -80,7 +81,7 @@ export default function Header() {
             </Navbar.Item>
           </Navbar.Content>
         </Navbar>
-      
+        </div>
     )
   }
 

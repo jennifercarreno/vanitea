@@ -93,7 +93,6 @@ const Detail = ({product}) => {
 
 
   const createTest = async (e) => {
-    e.preventDefault();
     let list = handleChangeInput()
     console.log(tagList)
     const res = await fetch('/api/test/add', {
@@ -102,7 +101,6 @@ const Detail = ({product}) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title,
         content,
         productId: product.productId,
         productImage: product["currentSku"].skuImages.image1500,
@@ -140,8 +138,10 @@ const Detail = ({product}) => {
           {/* PRODUCT DETAILS */}
           <Grid xs={6}>
             <Col>
-            <Text h3 color="white">{ product["brand"]?.displayName}</Text>
+            <Text h3 >{ product["brand"]?.displayName}</Text>
             <Text h2 color="secondary"> { product?.displayName}</Text>
+            <Spacer y={1}></Spacer>
+            <Text > { product?.quickLookDescription}</Text>
             </Col>
           </Grid>
         </Grid.Container>  
@@ -167,14 +167,14 @@ const Detail = ({product}) => {
 
               {/* TITLE */}
                 <div className="form-group">
-                  <label>Title</label>
+                  {/* <label>Title</label> */}
                   <Spacer y={.5} />
-                  <Input
+                  {/* <Input
                       type= "text"
                       placeholder= "Title of the post"
                       onChange={(e) => setTitle(e.target.value)}
                       value={title}
-                  />
+                  /> */}
                 </div>
                 
                 {/* TAGS */}
