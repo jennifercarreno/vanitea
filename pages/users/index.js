@@ -64,22 +64,22 @@ export default function UserHome({ reviews }) {
                         <h3>Recent Reviews</h3>
                         
                     </Row>
-                    {reviews.map((review) => (
+                    {reviews?.map((review) => (
                         <div>
 
                         <Grid.Container>
                             <Grid xs={2}>
-                                <Image src={review.productImage} ></Image>
+                                <Image src={review?.productImage} ></Image>
 
                             </Grid>
                             <Spacer x={1}></Spacer>
                             <Grid xs={6}>
                                 <Col>
-                                <a href={'/products/' + review.productId} key={review._id}>
-                                <h2>{review.productName} &rarr;</h2>
+                                <a href={'/products/' + review?.productId} key={review?._id}>
+                                <h2>{review?.productName} &rarr;</h2>
                                 </a>
                                 <Row>
-                                {review.tags.map((tag) => (
+                                {review?.tags.map((tag) => (
                                     <Tooltip > 
                                 <Button shadow auto color="secondary">
                                     {tag}
@@ -91,7 +91,7 @@ export default function UserHome({ reviews }) {
                                 ))}
                                 </Row>
                                 <Spacer y={1.5}></Spacer>
-                                <p>{review.content}</p>
+                                <p>{review?.content}</p>
                                
                                 
                                 
