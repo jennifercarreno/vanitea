@@ -116,7 +116,6 @@ const Detail = ({product}) => {
 
   };
 
-  // const {} = useForm();
 
   return (
     <div> 
@@ -180,47 +179,30 @@ const Detail = ({product}) => {
                 <div className="form-group">
                   <Spacer y={.5}></Spacer>
                   <div className="tags">
-                  <label htmlFor="tag">Tag</label>
+                  <label>Tag</label>
 
                   { inputFields.map(inputField => (
-                  <div key={inputField.id}>
+                  <div className="form-row" key={inputField.id}>
+                    <Spacer y={.5}></Spacer>
+
+                    <Row>
                     <Input
+                      type= "text"
                       name="firstTag"
-                      label="Tag"
-                      variant="filled"
                       value={inputField.firstTag}
                       onChange={(event) => handleChangeInput(inputField.id, event)}
                     />
+                    <Spacer y={.5}></Spacer>
                     <Button onClick={addMemberRow} icon={<Plus set="bold" fill="currentColor"/>} rounded auto color="secondary">   
                     </Button>
+                    </Row>
+
+                    </div>))}
                   
-                    
                   </div>
-                )) }
-
-                    {/* {tags.map((tag) => (
-                      <div className="form-row" key={tag.id}>
-                        
-                          <Spacer y={.5}></Spacer>
-                          <Row>
-                          <Input
-                            // name="tagInput"
-                            type="text"
-                            onChange={(e) => setTagInput(e.target.value)}
-                            value={tagInput.tag}
-                          />
-                          <Spacer x={.5}></Spacer>
-                        <Button onClick={addMemberRow} icon={<Plus set="bold" fill="currentColor"/>} rounded auto color="secondary">   
-                        </Button>
-                          </Row>
-                          
-                        
-                        
-                      </div>
-                    ))} */}
+          
 
                           
-                  </div>
                 </div>
                 
                 {/* CONTENT */}
