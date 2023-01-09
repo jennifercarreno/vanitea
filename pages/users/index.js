@@ -65,16 +65,19 @@ export default function UserHome({ reviews }) {
                         
                     </Row>
                     {reviews.map((review) => (
+                        <div>
                             <a
-                                href="https://nextjs.org/docs"
+                                href={'/products/' + review.productId}
                                 key={review._id}
                                 
                             >
-                                <h2>{review.title} &rarr;</h2>
-                                <p>{review.content}</p>
+                                <h2>{review.productName} &rarr;</h2>
+                                
 
                                 
                             </a>
+                            <p>{review.content}</p>
+                        </div>
                             ))}
                 </div>
             )}
